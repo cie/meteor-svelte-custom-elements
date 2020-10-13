@@ -10,7 +10,7 @@ const pkgPath = findUp.sync('package.json');
 // Read compiler options from `package.json`.
 if (pkgPath) {
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
-  options = pkg['svelte:compiler'];
+  options = pkg['cie:svelte-custom-elements'];
 
   if (!pkg.dependencies || !pkg.dependencies.svelte) {
     console.warn(`
@@ -37,5 +37,5 @@ If you encounter error messages, consider running:
 }
 
 Plugin.registerCompiler({
-  extensions: (options && options.extensions) || ['svelte']
+  extensions: (options && options.extensions) || ['svelte-ce']
 }, () => new SvelteCompiler(options));
