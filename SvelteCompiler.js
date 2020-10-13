@@ -2,10 +2,10 @@ import htmlparser from 'htmlparser2';
 import sourcemap from 'source-map';
 import svelte from 'svelte/compiler';
 
-SvelteCompiler = class SvelteCompiler extends CachingCompiler {
+SvelteCECompiler = class SvelteCECompiler extends CachingCompiler {
   constructor(options = {}) {
     super({
-      compilerName: 'svelte',
+      compilerName: 'svelte-ce',
       defaultCacheSize: 1024 * 1024 * 10
     });
 
@@ -106,6 +106,7 @@ SvelteCompiler = class SvelteCompiler extends CachingCompiler {
     const svelteOptions = {
       dev: process.env.NODE_ENV !== 'production',
       filename: path,
+      customElement: true,
       name: basename
         .slice(0, basename.indexOf('.')) // Remove extension
         .replace(/[^a-z0-9_$]/ig, '_') // Ensure valid identifier
@@ -115,11 +116,7 @@ SvelteCompiler = class SvelteCompiler extends CachingCompiler {
     if (arch.startsWith('os.')) {
       svelteOptions.generate = 'ssr';
     } else {
-      const { hydratable, css } = this.options;
-
-      if (hydratable === true) {
-        svelteOptions.hydratable = true;
-      }
+      const { css } = this.options;
 
       if (css === false) {
         svelteOptions.css = false;
