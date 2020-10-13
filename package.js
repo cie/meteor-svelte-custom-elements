@@ -1,20 +1,20 @@
 Package.describe({
-  name: 'svelte:compiler',
+  name: 'cie:svelte-custom-elements',
   version: '3.27.0',
-  summary: 'Svelte compiler',
-  git: 'https://github.com/meteor-svelte/meteor-svelte.git',
+  summary: 'Svelte compiler that generates custom elements',
+  git: 'https://github.com/cie/meteor-svelte-custom-elements.git',
   documentation: 'README.md'
 });
 
 Package.registerBuildPlugin({
-  name: 'svelte-compiler',
+  name: 'svelte-ce-compiler',
   use: [
     'babel-compiler@7.3.4',
     'caching-compiler@1.2.1',
     'ecmascript@0.12.7'
   ],
   sources: [
-    'SvelteCompiler.js',
+    'SvelteCECompiler.js',
     'plugin.js'
   ],
   npmDependencies: {
